@@ -28,4 +28,5 @@
     <color name="status_failure">#F44336</color>
     <color name="status_running">#2196F3</color>
     <color name="status_queued">#FF9800</color>
+    <color name="bg">#1A1A2E</color>
 </resources>
