@@ -128,9 +128,9 @@ class NewProjectFragment : Fragment() {
         val description = binding.etDescription.text.toString()
         val packageName = binding.etPackageName.text.toString()
         val type = when (binding.rgProjectType.checkedRadioButtonId) {
-            R.id.rbHtml -> Constants.PROJECT_TYPE_HTML
-            R.id.rbKotlin -> Constants.PROJECT_TYPE_KOTLIN
-            R.id.rbJava -> Constants.PROJECT_TYPE_JAVA
+            R.id.rb_html -> Constants.PROJECT_TYPE_HTML
+            R.id.rb_kotlin -> Constants.PROJECT_TYPE_KOTLIN
+            R.id.rb_java -> Constants.PROJECT_TYPE_JAVA
             else -> Constants.PROJECT_TYPE_HTML
         }
 

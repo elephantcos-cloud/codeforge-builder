@@ -117,18 +117,18 @@ class SettingsFragment : Fragment() {
         viewModel.editorTheme.observe(viewLifecycleOwner) { theme ->
             binding.rgEditorTheme.check(
                 when (theme) {
-                    Constants.EDITOR_THEME_LIGHT -> com.codeforge.builder.R.id.rbLight
-                    Constants.EDITOR_THEME_MONOKAI -> com.codeforge.builder.R.id.rbMonokai
-                    else -> com.codeforge.builder.R.id.rbDark
+                    Constants.EDITOR_THEME_LIGHT -> com.codeforge.builder.R.id.rb_light
+                    Constants.EDITOR_THEME_MONOKAI -> com.codeforge.builder.R.id.rb_monokai
+                    else -> com.codeforge.builder.R.id.rb_dark
                 }
             )
         }
         viewModel.themeMode.observe(viewLifecycleOwner) { mode ->
             binding.rgTheme.check(
                 when (mode) {
-                    1 -> com.codeforge.builder.R.id.rbLight2
-                    2 -> com.codeforge.builder.R.id.rbDark2
-                    else -> com.codeforge.builder.R.id.rbSystem
+                    1 -> com.codeforge.builder.R.id.rb_light2
+                    2 -> com.codeforge.builder.R.id.rb_dark2
+                    else -> com.codeforge.builder.R.id.rb_system
                 }
             )
         }
@@ -203,8 +203,8 @@ class SettingsFragment : Fragment() {
 
         binding.rgEditorTheme.setOnCheckedChangeListener { _, id ->
             val theme = when (id) {
-                com.codeforge.builder.R.id.rbLight -> Constants.EDITOR_THEME_LIGHT
-                com.codeforge.builder.R.id.rbMonokai -> Constants.EDITOR_THEME_MONOKAI
+                com.codeforge.builder.R.id.rb_light -> Constants.EDITOR_THEME_LIGHT
+                com.codeforge.builder.R.id.rb_monokai -> Constants.EDITOR_THEME_MONOKAI
                 else -> Constants.EDITOR_THEME_DARK
             }
             viewModel.saveEditorTheme(theme)
@@ -212,8 +212,8 @@ class SettingsFragment : Fragment() {
 
         binding.rgTheme.setOnCheckedChangeListener { _, id ->
             val mode = when (id) {
-                com.codeforge.builder.R.id.rbLight2 -> 1
-                com.codeforge.builder.R.id.rbDark2 -> 2
+                com.codeforge.builder.R.id.rb_light2 -> 1
+                com.codeforge.builder.R.id.rb_dark2 -> 2
                 else -> 0
             }
             viewModel.saveTheme(mode)

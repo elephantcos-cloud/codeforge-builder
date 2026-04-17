@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.navArgs
 import com.codeforge.builder.databinding.FragmentApkPreviewBinding
 import com.codeforge.builder.utils.hide
 import com.codeforge.builder.utils.show
@@ -20,7 +19,7 @@ class ApkPreviewFragment : Fragment() {
 
     private var _binding: FragmentApkPreviewBinding? = null
     private val binding get() = _binding!!
-    private val args: ApkPreviewFragmentArgs by navArgs()
+    private val args: ApkPreviewFragmentArgs by lazy { ApkPreviewFragmentArgs.fromBundle(requireArguments()) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

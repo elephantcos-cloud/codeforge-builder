@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.*
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import com.codeforge.builder.R
 import com.codeforge.builder.data.local.entity.BuildRecord
 import com.codeforge.builder.data.local.entity.Project
@@ -18,6 +17,7 @@ import com.codeforge.builder.data.remote.model.ApiResult
 import com.codeforge.builder.data.repository.GitHubRepository
 import com.codeforge.builder.databinding.FragmentEditorBinding
 import com.codeforge.builder.utils.*
+import com.codeforge.builder.CodeForgeApp
 import com.codeforge.builder.worker.BuildMonitorWorker
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.tabs.TabLayout
@@ -166,7 +166,7 @@ class EditorViewModel(
                     commitMessage = run.headCommit?.message ?: ""
                 )
                 val buildId = repo.insertBuild(buildRecord)
-                repo.updateBuildStatus(project.id, run.status, System.currentTimeMillis())
+                repo.updateBuildStatus(buildId, run.status, run.conclusion ?: "", System.currentTimeMillis())
 
                 buildState.value = BuildState.Building(run.id)
 
@@ -211,7 +211,7 @@ class EditorFragment : Fragment() {
 
     private var _binding: FragmentEditorBinding? = null
     private val binding get() = _binding!!
-    private val args: EditorFragmentArgs by navArgs()
+    private val args: EditorFragmentArgs by lazy { EditorFragmentArgs.fromBundle(requireArguments()) }
 
     private val viewModel: EditorViewModel by viewModels {
         EditorViewModelFactory(
@@ -386,7 +386,7 @@ class EditorFragment : Fragment() {
             .setTitle("Add File")
             .setView(view)
             .setPositiveButton("Add") { _, _ ->
-                val nameInput = view.findViewById<com.google.android.material.textfield.TextInputEditText>(R.id.etFileName)
+                val nameInput = view.findViewById<com.google.android.material.textfield.TextInputEditText>(R.id.et_file_name)
                 val fileName = nameInput?.text?.toString()?.trim() ?: return@setPositiveButton
                 if (fileName.isNotEmpty()) {
                     val lang = fileName.substringAfterLast('.', "")

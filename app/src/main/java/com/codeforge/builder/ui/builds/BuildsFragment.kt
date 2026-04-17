@@ -52,7 +52,7 @@ class BuildsViewModel(
             downloadState.value = DownloadState.Downloading(build.id)
             try {
                 val token = prefs.githubToken.first()
-                val destDir = File(CodeForgeApp.instance.cacheDir, "apks").also { it.mkdirs() }
+                val destDir = File(CodeForgeApp.cacheDir, "apks").also { it.mkdirs() }
                 val destFile = File(destDir, "${build.projectName}_${build.id}.zip")
 
                 val result = repo.downloadArtifact(build.apkDownloadUrl, destFile)
@@ -69,7 +69,7 @@ class BuildsViewModel(
     }
 
     fun openInBrowser(url: String) {
-        CodeForgeApp.instance.openUrl(url)
+        CodeForgeApp.openUrl(url)
     }
 
     fun deleteOldBuilds() {

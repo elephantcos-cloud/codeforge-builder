@@ -346,7 +346,7 @@ function showQ(){
   document.getElementById('score').textContent='Score: '+score;
   document.getElementById('question').textContent=q.q;
   document.getElementById('feedback').textContent='';
-  document.getElementById('options').innerHTML=q.options.map((o,i)=>`<button class="opt" onclick="answer(${i})">${o}</button>`).join('');
+  document.getElementById('options').innerHTML=q.options.map((o,i)=>`<button class="opt" onclick="answer(${"$"}{i})">${"$"}{o}</button>`).join('');
 }
 function answer(i){
   const q=questions[cur];const btns=document.querySelectorAll('.opt');
@@ -469,7 +469,7 @@ async function getWeather(){
     document.getElementById('noKey').style.display='block';return;
   }
   try{
-    const r=await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`);
+    const r=await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${"$"}{city}&appid=${"$"}{API_KEY}&units=metric`);
     const d=await r.json();
     document.getElementById('city').textContent=d.name+', '+d.sys.country;
     document.getElementById('temp').textContent=Math.round(d.main.temp)+'°C';

@@ -143,10 +143,10 @@ class TemplatesFragment : Fragment() {
             com.codeforge.builder.R.layout.dialog_use_template, null
         )
         val etName = dialogView.findViewById<com.google.android.material.textfield.TextInputEditText>(
-            com.codeforge.builder.R.id.etProjectName
+            com.codeforge.builder.R.id.et_project_name
         )
         val etPkg = dialogView.findViewById<com.google.android.material.textfield.TextInputEditText>(
-            com.codeforge.builder.R.id.etPackageName
+            com.codeforge.builder.R.id.et_package_name
         )
         etName?.setText(template.name)
         etPkg?.setText("com.myapp.${template.name.lowercase().replace(" ", "")}")
