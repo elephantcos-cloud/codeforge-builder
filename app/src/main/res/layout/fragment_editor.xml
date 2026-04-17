@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/editor_bg">
+
+    <!-- File Tabs -->
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tab_files"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/surface"
+        app:tabMode="scrollable"
+        app:tabGravity="start"
+        app:tabTextColor="@color/on_surface_variant"
+        app:tabSelectedTextColor="@color/primary"
+        app:tabIndicatorColor="@color/primary"/>
+
+    <!-- Toolbar -->
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/surface_variant"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingHorizontal="4dp">
+
+            <ImageButton
+                android:id="@+id/btn_save"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:src="@drawable/ic_save"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                app:tint="@color/on_surface"
+                android:contentDescription="Save"/>
+
+            <View android:layout_width="1dp" android:layout_height="24dp"
+                android:background="@color/divider" android:layout_marginHorizontal="4dp"/>
+
+            <ImageButton
+                android:id="@+id/btn_undo"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:src="@drawable/ic_undo"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                app:tint="@color/on_surface"
+                android:contentDescription="Undo"/>
+
+            <ImageButton
+                android:id="@+id/btn_redo"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:src="@drawable/ic_redo"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                app:tint="@color/on_surface"
+                android:contentDescription="Redo"/>
+
+            <View android:layout_width="1dp" android:layout_height="24dp"
+                android:background="@color/divider" android:layout_marginHorizontal="4dp"/>
+
+            <ImageButton
+                android:id="@+id/btn_format_code"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:src="@drawable/ic_format"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                app:tint="@color/on_surface"
+                android:contentDescription="Format"/>
+
+            <View android:layout_width="1dp" android:layout_height="24dp"
+                android:background="@color/divider" android:layout_marginHorizontal="4dp"/>
+
+            <ImageButton
+                android:id="@+id/btn_add_file"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:src="@drawable/ic_add_file"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                app:tint="@color/on_surface"
+                android:contentDescription="Add File"/>
+
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <!-- Code Editor WebView -->
+    <WebView
+        android:id="@+id/web_view_editor"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+    <!-- Build Status Bar -->
+    <LinearLayout
+        android:id="@+id/build_status_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="@color/surface"
+        android:padding="12dp"
+        android:visibility="gone">
+
+        <ProgressBar
+            android:id="@+id/build_progress_bar"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:indeterminate="true"
+            android:layout_marginEnd="10dp"/>
+
+        <TextView
+            android:id="@+id/tv_build_status"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Building..."
+            android:textSize="13sp"
+            android:textColor="@color/on_surface"/>
+
+    </LinearLayout>
+
+    <!-- FAB Build -->
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/fab_build"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        android:text="Build APK"
+        app:icon="@drawable/ic_build"/>
+
+</LinearLayout>

@@ -1,0 +1,6 @@
+-keep class com.codeforge.builder.data.remote.model.** { *; }
+-keep class com.codeforge.builder.data.local.entity.** { *; }
+-keepattributes Signature
+-keepattributes *Annotation*
+-dontwarn okhttp3.**
+-dontwarn retrofit2.**

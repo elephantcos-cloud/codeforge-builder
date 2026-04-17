@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
+
+    <!-- Home -->
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.codeforge.builder.ui.home.HomeFragment"
+        android:label="Projects">
+        <action android:id="@+id/action_home_to_editor"
+            app:destination="@id/editorFragment"/>
+        <action android:id="@+id/action_home_to_newProject"
+            app:destination="@id/newProjectFragment"/>
+    </fragment>
+
+    <!-- New Project -->
+    <fragment
+        android:id="@+id/newProjectFragment"
+        android:name="com.codeforge.builder.ui.home.NewProjectFragment"
+        android:label="New Project">
+        <action android:id="@+id/action_newProject_to_editor"
+            app:destination="@id/editorFragment"/>
+    </fragment>
+
+    <!-- Editor -->
+    <fragment
+        android:id="@+id/editorFragment"
+        android:name="com.codeforge.builder.ui.editor.EditorFragment"
+        android:label="Editor">
+        <argument
+            android:name="projectId"
+            app:argType="long"/>
+        <action android:id="@+id/action_editor_to_builds"
+            app:destination="@id/buildsFragment"
+            app:launchSingleTop="true"/>
+    </fragment>
+
+    <!-- Builds -->
+    <fragment
+        android:id="@+id/buildsFragment"
+        android:name="com.codeforge.builder.ui.builds.BuildsFragment"
+        android:label="Build History">
+        <action android:id="@+id/action_builds_to_preview"
+            app:destination="@id/apkPreviewFragment"/>
+    </fragment>
+
+    <!-- APK Preview -->
+    <fragment
+        android:id="@+id/apkPreviewFragment"
+        android:name="com.codeforge.builder.ui.preview.ApkPreviewFragment"
+        android:label="APK Info">
+        <argument
+            android:name="apkPath"
+            app:argType="string"
+            android:defaultValue=""/>
+    </fragment>
+
+    <!-- Templates -->
+    <fragment
+        android:id="@+id/templatesFragment"
+        android:name="com.codeforge.builder.ui.templates.TemplatesFragment"
+        android:label="Templates">
+        <action android:id="@+id/action_templates_to_editor"
+            app:destination="@id/editorFragment"/>
+    </fragment>
+
+    <!-- Settings -->
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.codeforge.builder.ui.settings.SettingsFragment"
+        android:label="Settings"/>
+
+</navigation>

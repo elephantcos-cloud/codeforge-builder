@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- ── GitHub Section ─────────────────────── -->
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="GitHub Configuration"
+            android:textSize="13sp" android:textColor="@color/primary"
+            android:textStyle="bold" android:layout_marginBottom="8dp"
+            android:paddingHorizontal="4dp"/>
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            app:cardBackgroundColor="@color/surface" app:cardCornerRadius="12dp"
+            android:layout_marginBottom="8dp">
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="vertical" android:padding="16dp">
+
+                <TextView android:id="@+id/tv_github_user"
+                    android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:text="Not connected" android:textSize="13sp"
+                    android:textColor="@color/on_surface_variant" android:layout_marginBottom="12dp"/>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:hint="GitHub Personal Access Token"
+                    app:helperText="Needs: repo, workflow permissions"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_marginBottom="12dp">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_token"
+                        android:layout_width="match_parent" android:layout_height="wrap_content"
+                        android:inputType="textPassword" android:fontFamily="monospace"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:hint="Commit Email (optional)"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_marginBottom="12dp">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_email"
+                        android:layout_width="match_parent" android:layout_height="wrap_content"
+                        android:inputType="textEmailAddress"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:orientation="horizontal" android:gravity="end">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_open_github_tokens"
+                        android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:text="Get Token" android:layout_marginEnd="8dp"
+                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                        app:icon="@drawable/ic_github"/>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_save_token"
+                        android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:text="Save" android:layout_marginEnd="8dp"/>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_validate_token"
+                        android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:text="Validate"/>
+
+                </LinearLayout>
+
+                <ProgressBar android:id="@+id/progress_validate"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp" android:visibility="gone"/>
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- ── Editor Section ─────────────────────── -->
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="Editor" android:textSize="13sp" android:textColor="@color/primary"
+            android:textStyle="bold" android:layout_marginTop="8dp" android:layout_marginBottom="8dp"
+            android:paddingHorizontal="4dp"/>
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            app:cardBackgroundColor="@color/surface" app:cardCornerRadius="12dp"
+            android:layout_marginBottom="8dp">
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="vertical" android:padding="16dp">
+
+                <!-- Font Size -->
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:orientation="horizontal" android:gravity="center_vertical"
+                    android:layout_marginBottom="8dp">
+                    <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                        android:layout_weight="1" android:text="Font Size"
+                        android:textColor="@color/on_surface" android:textSize="14sp"/>
+                    <TextView android:id="@+id/tv_font_size_value"
+                        android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:text="14sp" android:textColor="@color/primary" android:textSize="14sp"/>
+                </LinearLayout>
+                <com.google.android.material.slider.Slider
+                    android:id="@+id/slider_font_size"
+                    android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:valueFrom="10" android:valueTo="24" android:stepSize="1"
+                    android:value="14" android:layout_marginBottom="12dp"/>
+
+                <!-- Editor Theme -->
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Editor Theme" android:textColor="@color/on_surface"
+                    android:textSize="14sp" android:layout_marginBottom="8dp"/>
+
+                <RadioGroup android:id="@+id/rg_editor_theme"
+                    android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <RadioButton android:id="@+id/rb_dark" android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:text="Dark" android:checked="true"
+                        android:layout_marginEnd="16dp" android:textColor="@color/on_surface"/>
+                    <RadioButton android:id="@+id/rb_light" android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:text="Light"
+                        android:layout_marginEnd="16dp" android:textColor="@color/on_surface"/>
+                    <RadioButton android:id="@+id/rb_monokai" android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:text="Monokai"
+                        android:textColor="@color/on_surface"/>
+                </RadioGroup>
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- ── App Theme ──────────────────────────── -->
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="App Theme" android:textSize="13sp" android:textColor="@color/primary"
+            android:textStyle="bold" android:layout_marginTop="8dp" android:layout_marginBottom="8dp"
+            android:paddingHorizontal="4dp"/>
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            app:cardBackgroundColor="@color/surface" app:cardCornerRadius="12dp"
+            android:layout_marginBottom="16dp">
+            <RadioGroup android:id="@+id/rg_theme"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="vertical" android:padding="8dp">
+                <RadioButton android:id="@+id/rb_system" android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:text="Follow System"
+                    android:checked="true" android:padding="12dp" android:textColor="@color/on_surface"/>
+                <RadioButton android:id="@+id/rb_light2" android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:text="Light"
+                    android:padding="12dp" android:textColor="@color/on_surface"/>
+                <RadioButton android:id="@+id/rb_dark2" android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:text="Dark"
+                    android:padding="12dp" android:textColor="@color/on_surface"/>
+            </RadioGroup>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- ── Danger Zone ───────────────────────── -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_clear_all"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:text="Clear All Data"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            app:strokeColor="@color/error"
+            android:textColor="@color/error"/>
+
+    </LinearLayout>
+</ScrollView>
