@@ -1,68 +1,24 @@
-name: Build CodeForge APK
-
+name: Build APK
 on:
   push:
-    branches: [ main, master ]
-  pull_request:
-    branches: [ main, master ]
+    branches: [ main ]
   workflow_dispatch:
-
 jobs:
   build:
-    name: Build Debug APK
     runs-on: ubuntu-latest
-
+    timeout-minutes: 25
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
-
-      - name: Set up JDK 17
-        uses: actions/setup-java@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
         with:
           java-version: '17'
           distribution: 'temurin'
-
-      - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v3
+      - uses: gradle/actions/setup-gradle@v3
+      - run: gradle wrapper --gradle-version 8.4
+      - run: chmod +x gradlew
+      - run: ./gradlew assembleDebug --no-daemon -Dorg.gradle.jvmargs="-Xmx3g"
+      - uses: actions/upload-artifact@v4
         with:
-          gradle-version: '8.6'
-
-      - name: Cache Gradle Dependencies
-        uses: actions/cache@v4
-        with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
-          restore-keys: |
-            ${{ runner.os }}-gradle-
-
-      - name: Grant Gradlew Permission
-        run: chmod +x gradlew
-
-      - name: Build Debug APK
-        run: ./gradlew assembleDebug --no-daemon --stacktrace
-
-      - name: Get APK Info
-        run: |
-          APK_PATH="app/build/outputs/apk/debug/app-debug.apk"
-          if [ -f "$APK_PATH" ]; then
-            SIZE=$(du -sh "$APK_PATH" | cut -f1)
-            echo "✅ Build Successful!"
-            echo "📦 APK Size: $SIZE"
-          fi
-
-      - name: Upload Debug APK
-        uses: actions/upload-artifact@v4
-        with:
-          name: CodeForge-Debug-${{ github.run_number }}
-          path: app/build/outputs/apk/debug/app-debug.apk
-          retention-days: 30
-
-      - name: Upload Build Logs on Failure
-        if: failure()
-        uses: actions/upload-artifact@v4
-        with:
-          name: build-logs
-          path: app/build/reports/
+          name: app-debug
+          path: app/build/outputs/apk/debug/*.apk
           retention-days: 7
