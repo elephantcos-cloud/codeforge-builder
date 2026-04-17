@@ -189,6 +189,8 @@ class GitHubRepository(context: Context) {
     suspend fun insertProject(project: Project) = projectDao.insertProject(project)
     suspend fun updateProject(project: Project) = projectDao.updateProject(project)
     suspend fun deleteProject(project: Project) = projectDao.deleteProject(project)
+    suspend fun touchProject(id: Long) = projectDao.touchProject(id)
+    suspend fun updateGithubInfo(id: Long, repoName: String, repoUrl: String) = projectDao.updateGithubInfo(id, repoName, repoUrl)
 
     // ─── LOCAL DB — Files ──────────────────────────────────────
     fun getFilesForProject(projectId: Long) = fileDao.getFilesForProject(projectId)
