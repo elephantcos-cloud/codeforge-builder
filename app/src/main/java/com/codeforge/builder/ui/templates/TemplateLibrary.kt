@@ -273,9 +273,9 @@ function render(){
   const done=tasks.filter(t=>t.done).length;
   document.getElementById('stats').textContent=done+'/'+tasks.length+' completed';
   ul.innerHTML=tasks.map((t,i)=>`<li class="${'$'}{t.done?'done':''}">
-    <input type="checkbox" ${t.done?'checked':''} onchange="toggle(${i})">
+    <input type="checkbox" ${'$'}{t.done?'checked':''} onchange="toggle(${"$"}{i})">
     <span>${'$'}{t.text}</span>
-    <button class="del" onclick="del(${i})">×</button>
+    <button class="del" onclick="del(${"$"}{i})">×</button>
   </li>`).join('');
 }
 function addTask(){
